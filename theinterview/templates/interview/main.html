@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    Scrapper hello
+{% endblock title %}
+
+
+{% block header %}
+    Главная страница
+{% endblock header %}
+
+
+{% block content %}
+    <h3>Контент Главной страницы будет здесь ...</h3>
+    <form method="post" action="create/">
+        {% csrf_token %}
+        <p>
+            <label>Здесь можно вводить вопросы</label><br>
+            <input type="text" name="quest"><br>
+            <label>Здесь можно вводить ответы на вопросы</label><br>
+            <input type="text" name="answ">
+        </p>
+        <input type="submit" value="Сохранить">
+    </form>
+
+    {% if questions.count > 0 %}
+    <h2>Список пользователей</h2>
+    <table>
+        <tr><th>Id</th><th>Имя</th><th>Возраст</th></tr>
+        {% for person in questions %}
+        <tr><td>{{ person.id }}</td><td>{{ person.quest }}</td><td>{{ person.answ }}</td></tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+{% endblock content %}
